@@ -16,6 +16,7 @@ Overview: for HP iLO adapters that support SNMP get. Or via operating system, us
 MIBs used:&#13;
 CPQSINFO-MIB&#13;
 CPQHLTH-MIB&#13;
+CPQHOST-MIB&#13;
 CPQIDA-MIB</description>
             <groups>
                 <group>
