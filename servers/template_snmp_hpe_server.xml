@@ -5015,12 +5015,80 @@ Please check the device for warnings</description>
                     <newvalue>sh-generic</newvalue>
                 </mapping>
                 <mapping>
+                    <value>86</value>
+                    <newvalue>sa-p240nr</newvalue>
+                </mapping>
+                <mapping>
+                    <value>87</value>
+                    <newvalue>sh-h240nr</newvalue>
+                </mapping>
+                <mapping>
                     <value>88</value>
                     <newvalue>sa-p840ar</newvalue>
                 </mapping>
                 <mapping>
+                    <value>89</value>
+                    <newvalue>sa-p542d</newvalue>
+                </mapping>
+                <mapping>
+                    <value>90</value>
+                    <newvalue>s100i</newvalue>
+                </mapping>
+                <mapping>
+                    <value>91</value>
+                    <newvalue>e208i-p</newvalue>
+                </mapping>
+                <mapping>
+                    <value>92</value>
+                    <newvalue>e208i-a</newvalue>
+                </mapping>
+                <mapping>
+                    <value>93</value>
+                    <newvalue>e208i-c</newvalue>
+                </mapping>
+                <mapping>
+                    <value>94</value>
+                    <newvalue>e208e-p</newvalue>
+                </mapping>
+                <mapping>
+                    <value>95</value>
+                    <newvalue>p204i-b</newvalue>
+                </mapping>
+                <mapping>
+                    <value>96</value>
+                    <newvalue>p204i-c</newvalue>
+                </mapping>
+                <mapping>
+                    <value>97</value>
+                    <newvalue>p408i-p</newvalue>
+                </mapping>
+                <mapping>
                     <value>98</value>
-                    <newvalue>sa-p408i-a</newvalue>
+                    <newvalue>p408i-a</newvalue>
+                </mapping>
+                <mapping>
+                    <value>99</value>
+                    <newvalue>p408e-p</newvalue>
+                </mapping>
+                <mapping>
+                    <value>100</value>
+                    <newvalue>p408i-c</newvalue>
+                </mapping>
+                <mapping>
+                    <value>101</value>
+                    <newvalue>p408e-m</newvalue>
+                </mapping>
+                <mapping>
+                    <value>102</value>
+                    <newvalue>p416ie-m</newvalue>
+                </mapping>
+                <mapping>
+                    <value>103</value>
+                    <newvalue>p816i-a</newvalue>
+                </mapping>
+                <mapping>
+                    <value>104</value>
+                    <newvalue>p408i-sb</newvalue>
                 </mapping>
             </mappings>
         </value_map>
