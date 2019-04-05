@@ -1,2 +1,2 @@
 # Requirements
-This templates needs the module templates under the modules folder
+These templates need the module templates under the modules folder
