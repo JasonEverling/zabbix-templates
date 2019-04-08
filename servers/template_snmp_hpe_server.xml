@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-04-07T20:23:44Z</date>
+    <date>2019-04-08T14:02:17Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -2159,7 +2159,7 @@ Firmware Version update method.</description>
                     <name>Memory Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#SLOT},1.3.6.1.4.1.232.6.2.14.13.1.1,{#CPU},1.3.6.1.4.1.232.6.2.14.13.1.3]</snmp_oid>
+                    <snmp_oid>discovery[{#SLOT},1.3.6.1.4.1.232.6.2.14.13.1.1,{#CPU},1.3.6.1.4.1.232.6.2.14.13.1.3,{#LOCALE},1.3.6.1.4.1.232.6.2.14.13.1.13]</snmp_oid>
                     <key>cpqHeMem.discovery</key>
                     <delay>1h</delay>
                     <status>0</status>
@@ -2188,16 +2188,16 @@ Firmware Version update method.</description>
                     <description/>
                     <item_prototypes>
                         <item_prototype>
-                            <name>System: Memory Slot {#SLOT} Location :</name>
+                            <name>System: Memory Slot {#LOCALE} ECC Condition :</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.232.6.2.14.13.1.13.{#SNMPINDEX}</snmp_oid>
-                            <key>system.mem.slot.local[ cpqHeResMem2ModuleHwLocation.{#SNMPINDEX}]</key>
-                            <delay>1d</delay>
-                            <history>2w</history>
-                            <trends>0</trends>
+                            <snmp_oid>1.3.6.1.4.1.232.6.2.14.13.1.20.{#SNMPINDEX}</snmp_oid>
+                            <key>system.mem.slot.eccStatus[ cpqHeResMem2ModuleCondition.{#SNMPINDEX}]</key>
+                            <delay>1m</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>4</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -2215,16 +2215,18 @@ Firmware Version update method.</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>CPQHLTH-MIB::cpqHeResMem2ModuleHwLocation&#13;
+                            <description>CPQHLTH-MIB::cpqHeResMem2ModuleCondition&#13;
 &#13;
-A text description of the hardware location, on complex multi SBB hardware only, for the memory module. A NULL string indicates that the hardware location could not be determined or is irrelevant.</description>
+This provides the current status of the correctable memory errors for this memory module. The following status values are supported: other(1): ECC is not supported on this memory module or the condition could not be determined. ok(2): The memory module is operating normally. degraded(3): The memory module is correctable error count has exceeded threshold or a configuration error has been detected. degradedModuleIndexUnknown(4): The correctable error count has exceeded threshold. The module number not available.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>Memory</name>
                                 </application>
                             </applications>
-                            <valuemap/>
+                            <valuemap>
+                                <name>CPQHLTH-MIB::cpqHeResMem2ModuleCondition</name>
+                            </valuemap>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -2250,7 +2252,7 @@ A text description of the hardware location, on complex multi SBB hardware only,
                             <master_item/>
                         </item_prototype>
                         <item_prototype>
-                            <name>System: Memory Slot {#SLOT} Status :</name>
+                            <name>System: Memory Slot {#LOCALE} Status :</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.232.6.2.14.13.1.19.{#SNMPINDEX}</snmp_oid>
@@ -4330,6 +4332,27 @@ Please check the device for warnings</description>
                 <mapping>
                     <value>5</value>
                     <newvalue>advancedECC</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>CPQHLTH-MIB::cpqHeResMem2ModuleCondition</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>ok</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>degraded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>degradedModuleIndexUnknown</newvalue>
                 </mapping>
             </mappings>
         </value_map>
