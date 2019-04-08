@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-04-08T18:42:18Z</date>
+    <date>2019-04-08T22:59:16Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -978,6 +978,193 @@ localStepWithFaults(15)&#13;
                     </applications>
                     <valuemap>
                         <name>CPQHLTH-MIB::cpqHeResilientMemStatus</name>
+                    </valuemap>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>System: Power Meter Reading</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>1.3.6.1.4.1.232.6.2.15.3.0</snmp_oid>
+                    <key>system.psu.meter.reading[cpqHePowerMeterCurrReading.0]</key>
+                    <delay>5m</delay>
+                    <history>90d</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>W</units>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>CPQHLTH::cpqHePowerMeterCurrReading&#13;
+&#13;
+This is the current Power Meter reading in Watts. This value shows the most recent power reading if available. On systems without Power Meter support, this value will be -1</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>System: Power Meter Status</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>1.3.6.1.4.1.232.6.2.15.2.0</snmp_oid>
+                    <key>system.psu.meter.status[cpqHePowerMeterStatus.0]</key>
+                    <delay>1d</delay>
+                    <history>2w</history>
+                    <trends>0d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>CPQHLTH::cpqHePowerMeterStatus&#13;
+&#13;
+This value specifies whether Power Meter reading is supported by this Server . The following values are supported: other(1) Could not read the Power Meter status. present(2) The Power Meter data is available. absent(3) The Power Meter data is not available at this time.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>CPQHLTH::cpqHePowerMeterStatus</name>
+                    </valuemap>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>System: Power Meter Support</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>1.3.6.1.4.1.232.6.2.15.1.0</snmp_oid>
+                    <key>system.psu.meter.support[cpqHePowerMeterSupport.0]</key>
+                    <delay>1d</delay>
+                    <history>2w</history>
+                    <trends>0d</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>CPQHLTH-MIB::cpqHePowerMeterSupport&#13;
+&#13;
+This value specifies whether Power Meter is supported by this Server . The following values are supported: other(1) Could not read the Power Meter status. supported(2) This system support Power Meter. unsupported(3) This system does not support Power Meter.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Power Supply</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>CPQHLTH::cpqHePowerMeterSupport</name>
                     </valuemap>
                     <logtimefmt/>
                     <preprocessing/>
@@ -3508,7 +3695,7 @@ Disk probably requires replacement.</description>
                     <description>CPQHLTH-MIB::cpqHeFltTolPowerSupplyStatus</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Chassis {#CHASSIS_NUM}, bay {#BAY_NUM}: Power supply status</name>
+                            <name>System: Power Chassis {#CHASSIS_NUM}, Bay {#BAY_NUM} Status</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.232.6.2.9.3.1.4.{#SNMPINDEX}</snmp_oid>
@@ -4426,6 +4613,40 @@ Please check the device for warnings</description>
             <tags/>
         </trigger>
     </triggers>
+    <graphs>
+        <graph>
+            <name>System: Power Meter</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>2</drawtype>
+                    <color>43A047</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SNMP HPE Server</host>
+                        <key>system.psu.meter.reading[cpqHePowerMeterCurrReading.0]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
     <value_maps>
         <value_map>
             <name>CPQHLTH-MIB::cpqHeResilientMemCondition</name>
@@ -4683,6 +4904,40 @@ Please check the device for warnings</description>
                 <mapping>
                     <value>13</value>
                     <newvalue>bridgeCard</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>CPQHLTH::cpqHePowerMeterStatus</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>present</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>absent</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>CPQHLTH::cpqHePowerMeterSupport</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>supported</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>unsupported</newvalue>
                 </mapping>
             </mappings>
         </value_map>
@@ -5675,7 +5930,7 @@ Please check the device for warnings</description>
                 </mapping>
                 <mapping>
                     <value>2</value>
-                    <newvalue>OK</newvalue>
+                    <newvalue>ok</newvalue>
                 </mapping>
                 <mapping>
                     <value>3</value>
