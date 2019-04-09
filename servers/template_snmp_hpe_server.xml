@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-04-09T14:24:38Z</date>
+    <date>2019-04-09T14:46:01Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -4557,10 +4557,11 @@ Temperature readings of testpoint: {#SNMPINDEX}</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and {Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last()}&gt;{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}</expression>
+                            <expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and&#13;
+{Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last(5m)}&gt;{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last(5m)}</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}=0 or&#13;
-{Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last()}&lt;{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}-3</recovery_expression>
+                            <recovery_expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and&#13;
+{Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last(5m)}&lt;={Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last(5m)}-3</recovery_expression>
                             <name>Temperature is above caution threshold: &quot;{#SENSOR_THRESHOLD}°C&quot;}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
