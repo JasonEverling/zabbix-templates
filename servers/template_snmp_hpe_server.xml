@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-04-09T14:46:01Z</date>
+    <date>2019-04-10T18:56:56Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -1218,7 +1218,10 @@ This value specifies whether Power Meter is supported by this Server . The follo
                     <privatekey/>
                     <port/>
                     <description>MIB: CPQSINFO-MIB&#13;
-The overall condition. This object represents the overall status of the server information represented by this MIB.</description>
+&#13;
+The overall condition. This object represents the overall status of the server information represented by this MIB.&#13;
+&#13;
+other(1), ok(2), degraded(3), failed(4)</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -2699,7 +2702,40 @@ This provides the current status of the correctable memory errors for this memor
                             <master_item/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template SNMP HPE Server:system.mem.slot.eccStatus[ cpqHeResMem2ModuleCondition.{#SNMPINDEX}].last()}&gt;2</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:system.mem.slot.eccStatus[ cpqHeResMem2ModuleCondition.{#SNMPINDEX}].last()}&lt;=2</recovery_expression>
+                            <name>System: Memory Slot {#LOCALE} Module ECC Status is degraded</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>1</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMP HPE Server:system.mem.slot.status[ cpqHeResMem2ModuleStatus.{#SNMPINDEX}].last()}&gt;6</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:system.mem.slot.status[ cpqHeResMem2ModuleStatus.{#SNMPINDEX}].last()}&lt;=6</recovery_expression>
+                            <name>System: Memory Slot {#LOCALE} Module Status is not normal</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>1</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
@@ -2725,7 +2761,7 @@ This provides the current status of the correctable memory errors for this memor
                     <name>FAN Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.232.6.2.6.7.1.9]</snmp_oid>
+                    <snmp_oid>discovery[{#CHASSIS},1.3.6.1.4.1.232.6.2.6.7.1.1,{#FAN},1.3.6.1.4.1.232.6.2.6.7.1.2]</snmp_oid>
                     <key>fan.discovery</key>
                     <delay>1h</delay>
                     <status>0</status>
@@ -2754,7 +2790,198 @@ This provides the current status of the correctable memory errors for this memor
                     <description>CPQHLTH-MIB::cpqHeFltTolFanCondition</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Fan {#SNMPINDEX} status</name>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  Hot Pluggable:</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.232.6.2.6.7.1.10.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.hotPluggable[cpqHeFltTolFanHotPlug.{#SNMPINDEX}]</key>
+                            <delay>1d</delay>
+                            <history>2w</history>
+                            <trends>0d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>CPQHLTH-MIB::cpqHeFltTolFanHotPlug&#13;
+&#13;
+This indicates if the fan is capable of being removed and/or inserted while the system is in an operational state. If the value is hotPluggable(3), the fan can be safely removed if and only if the cpqHeFltTolFanRedundant field is in a redundant(3) state. This value will be one of the following: other(1) The state could not be determined. nonHotPluggable(2) The fan is not hot plug capable. hotPluggable(3) The fan is hot plug capable and can be removed if the system is operating in a redundant state. A fan may be added to an empty fan bay.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>CPQHLTH-MIB::cpqHeFltTolFanHotPlug</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  Redundant Partner:</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.232.6.2.6.7.1.8.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.redundantPartner[cpqHeFltTolFanRedundantPartner.{#SNMPINDEX}]</key>
+                            <delay>1d</delay>
+                            <history>2w</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>CPQHLTH-MIB::cpqHeFltTolFanRedundantPartner&#13;
+&#13;
+This specifies the index of the redundant partner. A value of zero will be used if there is no redundant partner.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN} Redundant:</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.232.6.2.6.7.1.7.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.redundant[cpqHeFltTolFanRedundant.{#SNMPINDEX}]</key>
+                            <delay>1d</delay>
+                            <history>2w</history>
+                            <trends>0d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>CPQHLTH-MIB::cpqHeFltTolFanRedundant&#13;
+&#13;
+This specifies if the fan is in a redundant configuration.&#13;
+other(1), notRedundant(2), redundant(3)</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>CPQHLTH-MIB::cpqHeFltTolFanRedundant</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  Status:</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.232.6.2.6.7.1.9.{#SNMPINDEX}</snmp_oid>
@@ -2821,13 +3048,77 @@ failed(4)  A non-redundant fan is not operating properly.</description>
                             <application_prototypes/>
                             <master_item/>
                         </item_prototype>
+                        <item_prototype>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  Type:</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.232.6.2.6.7.1.5.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.type[cpqHeFltTolFanType.{#SNMPINDEX}]</key>
+                            <delay>1d</delay>
+                            <history>2w</history>
+                            <trends>0d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>CPQHLTH-MIB::cpqHeFltTolFanType&#13;
+&#13;
+This specifies the type of fan. other(1) The type of fan could not be determined. tachOutput(2) The fan can increase speed for greater cooling. Implies spin detect. spinDetect(3) The fan can detect when the fan stops spinning.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Fans</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>CPQHLTH-MIB::cpqHeFltTolFanType</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template SNMP HPE Server:sensor.fan.status[cpqHeFltTolFanCondition.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Fan {#SNMPINDEX} is in critical state</name>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  is in critical state</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2844,7 +3135,7 @@ Please check the fan unit</description>
                             <expression>{Template SNMP HPE Server:sensor.fan.status[cpqHeFltTolFanCondition.{#SNMPINDEX}].count(#1,{$FAN_WARN_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>Fan {#SNMPINDEX} is in warning state</name>
+                            <name>System: Chassis {#CHASSIS} , Fan {#FAN}  is in warning state</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -2856,7 +3147,7 @@ Please check the fan unit</description>
                             <manual_close>0</manual_close>
                             <dependencies>
                                 <dependency>
-                                    <name>Fan {#SNMPINDEX} is in critical state</name>
+                                    <name>System: Chassis {#CHASSIS} , Fan {#FAN}  is in critical state</name>
                                     <expression>{Template SNMP HPE Server:sensor.fan.status[cpqHeFltTolFanCondition.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS},eq)}=1</expression>
                                     <recovery_expression/>
                                 </dependency>
@@ -4277,15 +4568,31 @@ failed(4)  A power supply component detects a condition that could  permanently 
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS},eq)}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Chassis {#CHASSIS_NUM}, bay {#BAY_NUM}: Power supply is in critical state</name>
+                            <expression>{Template SNMP HPE Server:sensor.psu.folTolErrorCondition[cpqHeFltTolPowerSupplyErrorCondition.{#SNMPINDEX}].last()}&lt;&gt;1</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:sensor.psu.folTolErrorCondition[cpqHeFltTolPowerSupplyErrorCondition.{#SNMPINDEX}].last()}=1</recovery_expression>
+                            <name>Chassis {#CHASSIS_NUM}, Bay {#BAY_NUM}: Power supply has error code</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
                             <status>0</status>
-                            <priority>3</priority>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>1</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].last()}=4</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].last()}&lt;&gt;4</recovery_expression>
+                            <name>Chassis {#CHASSIS_NUM}, Bay {#BAY_NUM}: Power supply is in critical state</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
                             <description>Last value: {ITEM.LASTVALUE1}.&#13;
 Please check the power supply unit for errors</description>
                             <type>0</type>
@@ -4294,26 +4601,19 @@ Please check the power supply unit for errors</description>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].count(#1,{$PSU_WARN_STATUS},eq)}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Chassis {#CHASSIS_NUM}, bay {#BAY_NUM}: Power supply is in warning state</name>
+                            <expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].last()}=3</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].last()}&lt;&gt;3</recovery_expression>
+                            <name>Chassis {#CHASSIS_NUM}, Bay {#BAY_NUM}: Power supply is in degraded state</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-Please check the power supply unit for errors</description>
+                            <description/>
                             <type>0</type>
                             <manual_close>0</manual_close>
-                            <dependencies>
-                                <dependency>
-                                    <name>Chassis {#CHASSIS_NUM}, bay {#BAY_NUM}: Power supply is in critical state</name>
-                                    <expression>{Template SNMP HPE Server:sensor.psu.status[cpqHeFltTolPowerSupplyCondition.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS},eq)}=1</expression>
-                                    <recovery_expression/>
-                                </dependency>
-                            </dependencies>
+                            <dependencies/>
                             <tags/>
                         </trigger_prototype>
                     </trigger_prototypes>
@@ -4562,7 +4862,7 @@ Temperature readings of testpoint: {#SNMPINDEX}</description>
                             <recovery_mode>1</recovery_mode>
                             <recovery_expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and&#13;
 {Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last(5m)}&lt;={Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last(5m)}-3</recovery_expression>
-                            <name>Temperature is above caution threshold: &quot;{#SENSOR_THRESHOLD}°C&quot;}</name>
+                            <name>Temperature is above threshold: &quot;{#SENSOR_THRESHOLD}°C&quot;}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -4570,6 +4870,24 @@ Temperature readings of testpoint: {#SNMPINDEX}</description>
                             <priority>4</priority>
                             <description>Last value: {ITEM.LASTVALUE1}.&#13;
 This trigger uses temperature sensor values as well as temperature sensor status if available</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and&#13;
+{Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last(5m)}+{$TEMP_WARN} &gt;= {Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last(5m)}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last()}&lt;&gt;0 and&#13;
+{Template SNMP HPE Server:sensor.temp.value[cpqHeTemperatureCelsius.{#SNMPINDEX}].last(5m)}+{$TEMP_WARN} &lt;= {Template SNMP HPE Server:sensor.temp.threshold[cpqHeTemperatureThreshold.{#SNMPINDEX}].last(5m)}</recovery_expression>
+                            <name>Temperature is nearing threshold: &quot;{#SENSOR_THRESHOLD}°C&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -4997,40 +5315,8 @@ Please check virtual disk for warnings or errors</description>
                     <value>3</value>
                 </macro>
                 <macro>
-                    <macro>{$HEALTH_CRIT_STATUS}</macro>
-                    <value>4</value>
-                </macro>
-                <macro>
-                    <macro>{$HEALTH_WARN_STATUS}</macro>
-                    <value>3</value>
-                </macro>
-                <macro>
-                    <macro>{$PSU_CRIT_STATUS}</macro>
-                    <value>4</value>
-                </macro>
-                <macro>
-                    <macro>{$PSU_WARN_STATUS}</macro>
-                    <value>3</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_CRIT}</macro>
-                    <value>60</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_CRIT:&quot;Ambient&quot;}</macro>
-                    <value>35</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_CRIT_LOW}</macro>
-                    <value>5</value>
-                </macro>
-                <macro>
                     <macro>{$TEMP_WARN}</macro>
-                    <value>50</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_WARN:&quot;Ambient&quot;}</macro>
-                    <value>30</value>
+                    <value>3</value>
                 </macro>
                 <macro>
                     <macro>{$VDISK_CRIT_STATUS}</macro>
@@ -5087,9 +5373,13 @@ Device serial number has changed. Ack to close</description>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].count(#1,{$HEALTH_CRIT_STATUS},eq)}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
+            <expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;3&#13;
+and &#13;
+{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}=4</expression>
+            <recovery_mode>1</recovery_mode>
+            <recovery_expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;3&#13;
+or&#13;
+{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;4</recovery_expression>
             <name>System status is in critical state</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
@@ -5104,9 +5394,13 @@ Please check the device for errors</description>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].count(#1,{$HEALTH_WARN_STATUS},eq)}=1</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
+            <expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}=3 &#13;
+and &#13;
+{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;4</expression>
+            <recovery_mode>1</recovery_mode>
+            <recovery_expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;3&#13;
+or&#13;
+{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].last()}&lt;&gt;4</recovery_expression>
             <name>System status is in warning state</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
@@ -5117,13 +5411,7 @@ Please check the device for errors</description>
 Please check the device for warnings</description>
             <type>0</type>
             <manual_close>0</manual_close>
-            <dependencies>
-                <dependency>
-                    <name>System status is in critical state</name>
-                    <expression>{Template SNMP HPE Server:system.status[cpqSiMibCondition.0].count(#1,{$HEALTH_CRIT_STATUS},eq)}=1</expression>
-                    <recovery_expression/>
-                </dependency>
-            </dependencies>
+            <dependencies/>
             <tags/>
         </trigger>
     </triggers>
@@ -5162,6 +5450,57 @@ Please check the device for warnings</description>
         </graph>
     </graphs>
     <value_maps>
+        <value_map>
+            <name>CPQHLTH-MIB::cpqHeFltTolFanHotPlug</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>nonHotPluggable</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>hotPluggable</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>CPQHLTH-MIB::cpqHeFltTolFanRedundant</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>notRedundant</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>redundant</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>CPQHLTH-MIB::cpqHeFltTolFanType</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>other</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>tachOutput</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>spinDetect</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
         <value_map>
             <name>CPQHLTH-MIB::cpqHeFltTolPowerSupplyCondition</name>
             <mappings>
